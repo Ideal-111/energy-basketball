@@ -13,3 +13,138 @@
 @media(max-width:1100px){.highlight-layout{gap:30px;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)}.highlight-headline{font-size:35px}.highlight-scoreboard{gap:12px}.highlight-scoreboard strong{font-size:39px}}
 @media(max-width:900px){.site-header nav{gap:12px;font-size:12px}.site-header nav .nav-join{padding:10px 12px;margin-left:0}.brand{font-size:17px}}
 @media(max-width:760px){.game-result{grid-column:2;grid-row:2;text-align:left;justify-self:start}.game-result .game-tag{justify-content:flex-start;min-height:0;margin-bottom:7px;font-size:8px}.result-score{font-size:25px}.game-info .game-top-scorer{font-size:10px}.highlight-inner{padding-top:50px;padding-bottom:50px}.highlight-layout{grid-template-columns:1fr;gap:32px}.highlights .section-heading{margin-bottom:28px}.highlight-edition{font-size:9px}.highlight-film-bar,.highlight-film-footer{padding:12px;font-size:8px;letter-spacing:.03em}.highlight-film figcaption{font-size:9px}.highlight-headline{font-size:clamp(40px,10vw,58px)}.highlight-story{padding-top:5px}.highlight-scoreboard{max-width:420px;gap:25px}.highlight-scoreboard strong{font-size:48px}.highlight-player p{font-size:20px}.game-row[data-game-result] .calendar-button{align-self:end}.site-header nav>a{font-size:13px}}
+
+/* Sixteen-team knockout bracket. Each column shares sixteen equal grid rows. */
+.knockout {
+  padding-top: 50px;
+  border-top: 1px solid var(--line);
+}
+.bracket-scroll-hint {
+  display: none;
+  color: var(--muted);
+  font-size: 11px;
+  margin-bottom: 18px;
+}
+.bracket-scroll {
+  overflow-x: auto;
+  padding: 2px 2px 18px;
+  scrollbar-color: var(--orange) var(--line);
+  scrollbar-width: thin;
+}
+.bracket-scroll:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 5px;
+}
+.bracket-grid {
+  --bracket-row: 40px;
+  --bracket-gap: 36px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(205px, 1fr));
+  column-gap: var(--bracket-gap);
+  min-width: 928px;
+}
+.bracket-round {
+  min-width: 0;
+}
+.bracket-round-title {
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+  font-size: 15px;
+  font-weight: 700;
+}
+.bracket-round-4 .bracket-round-title {
+  color: var(--orange);
+  border-color: var(--orange);
+}
+.bracket-matches {
+  display: grid;
+  grid-template-rows: repeat(16, var(--bracket-row));
+}
+.bracket-match {
+  position: relative;
+  align-self: center;
+  height: 68px;
+  border: 1px solid #cbd0c2;
+  background: var(--white);
+}
+.bracket-match-title {
+  margin: 0;
+  height: 18px;
+  padding: 3px 10px;
+  color: var(--muted);
+  background: #e9eade;
+  font-size: 9px;
+  line-height: 12px;
+  font-weight: 500;
+}
+.bracket-team-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  height: 24px;
+  padding: 0 10px;
+}
+.bracket-team-row + .bracket-team-row {
+  border-top: 1px solid #e5e6db;
+}
+.bracket-team {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+.bracket-score {
+  color: var(--muted);
+  font: 11px Arial, sans-serif;
+}
+.bracket-round:not(.bracket-round-4) .bracket-match::after {
+  content: "";
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  width: calc(var(--bracket-gap) / 2);
+  border-top: 1px solid #aeb7a5;
+}
+.bracket-round:not(.bracket-round-1) .bracket-match::before {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  width: calc(var(--bracket-gap) / 2);
+  border-top: 1px solid #aeb7a5;
+}
+.bracket-connector {
+  position: absolute;
+  left: calc(var(--bracket-gap) / -2 - 1px);
+  top: calc(50% - var(--bracket-spread));
+  height: calc(var(--bracket-spread) * 2);
+  border-left: 1px solid #aeb7a5;
+  pointer-events: none;
+}
+.bracket-round-2 { --bracket-spread: var(--bracket-row); }
+.bracket-round-3 { --bracket-spread: calc(var(--bracket-row) * 2); }
+.bracket-round-4 { --bracket-spread: calc(var(--bracket-row) * 4); }
+.bracket-round-4 .bracket-match {
+  border-color: var(--orange);
+  box-shadow: 0 5px 18px #eb602f12;
+}
+.bracket-round-4 .bracket-match-title {
+  color: var(--paper);
+  background: var(--orange);
+}
+@media (min-width: 761px) and (max-width: 1200px) {
+  .site-header nav { gap: 10px; font-size: 12px; flex-wrap: wrap; justify-content: flex-end; }
+  .site-header nav .nav-join { padding: 10px; margin-left: 0; }
+  .brand { font-size: 16px; }
+}
+@media (max-width: 1100px) {
+  .bracket-scroll-hint { display: block; }
+}
+@media (max-width: 760px) {
+  .knockout { padding-top: 40px; }
+  .bracket-grid { --bracket-row: 38px; }
+  .bracket-round-title { font-size: 14px; }
+}
